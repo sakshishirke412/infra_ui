@@ -401,4 +401,608 @@
 <div class="flex flex-col items-center">
 <div class="relative w-18 h-18 flex items-center justify-center">
 <svg class="w-18 h-18 -rotate-90" viewbox="0 0 36 36">
-<path class="text-s
+<path class="text-slate-800/80" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.2"></path>
+<path class="text-rose-500 drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="94.8, 100" stroke-linecap="round" stroke-width="3.2"></path>
+</svg>
+<div class="absolute flex flex-col items-center justify-center">
+<span class="text-xs font-mono font-bold text-white">94.8%</span>
+</div>
+</div>
+<span class="text-[9px] font-mono text-slate-400 mt-1 uppercase tracking-tight">EXPLOIT RISK</span>
+</div>
+<!-- Meter 2: Cascade Severity -->
+<div class="flex flex-col items-center">
+<div class="relative w-18 h-18 flex items-center justify-center">
+<svg class="w-18 h-18 -rotate-90" viewbox="0 0 36 36">
+<path class="text-slate-800/80" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.2"></path>
+<path class="text-amber-400 drop-shadow-md" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="86.4, 100" stroke-linecap="round" stroke-width="3.2"></path>
+</svg>
+<div class="absolute flex flex-col items-center justify-center">
+<span class="text-xs font-mono font-bold text-white">86.4%</span>
+</div>
+</div>
+<span class="text-[9px] font-mono text-slate-400 mt-1 uppercase tracking-tight">CASCADE SEV</span>
+</div>
+<!-- Metric Pill -->
+<div class="text-right">
+<div class="text-2xl font-mono font-extrabold text-rose-400 tracking-tight">981 <span class="text-xs text-slate-400 font-normal">/ 17k</span></div>
+<div class="text-[9px] font-mono text-slate-400">MALICIOUS PROCESSES</div>
+<div class="text-sm font-mono font-semibold text-emerald-400 mt-0.5">2.4k <span class="text-[9px] text-slate-400 font-normal">ASSETS DEFENDED</span></div>
+</div>
+</div>
+<!-- AI PRIORITY: WHAT TO FIX FIRST -->
+<div class="text-left space-y-2.5 pt-1" data-purpose="explainable-ai-queue">
+<div class="flex items-center justify-between">
+<h2 class="text-xs font-mono font-bold tracking-widest text-cyan-300 uppercase flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+              AI ACTION DISPATCH: FIX FIRST
+            </h2>
+<span class="text-[10px] font-mono text-slate-400">CONFIDENCE: 99.2%</span>
+</div>
+<!-- Priority 1 Card -->
+<div class="p-3 rounded-2xl bg-rose-950/40 backdrop-blur-md space-y-1.5 border-0 shadow-lg">
+<div class="flex items-center justify-between text-[11px] font-mono">
+<span class="font-bold text-rose-400 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span> 01. ISOLATE KALWA RTU (PORT 502)
+              </span>
+<span class="text-slate-400 font-mono text-[10px]">-12m Impact</span>
+</div>
+<p class="text-xs text-slate-300 leading-snug">
+<strong class="text-white">Explainable Rationale:</strong> Attack payload contains hardcoded firmware injection for Schneider Electric RTU. Severing L2 boundary prevents trip of Trombay thermal bus.
+            </p>
+<div class="flex items-center justify-between pt-1 text-[11px] font-mono">
+<span class="text-slate-400">AVOIDS BLACKOUT IN: <span class="text-rose-300 font-semibold">12 MILLION HOMES</span></span>
+<button class="text-cyan-400 hover:text-cyan-200 underline font-semibold transition cursor-pointer">
+                APPLY RULE →
+              </button>
+</div>
+</div>
+<!-- Priority 2 Card -->
+<div class="p-2.5 rounded-2xl bg-black/40 backdrop-blur-md space-y-1 border-0">
+<div class="flex items-center justify-between text-[11px] font-mono">
+<span class="font-bold text-amber-400 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> 02. FLUSH BGP ROUTE TO NORTHERN GRID
+              </span>
+<span class="text-slate-400 font-mono text-[10px]">T-22m</span>
+</div>
+<p class="text-xs text-slate-400 leading-snug">
+              Prevent telemetry desynchronization between WR-RLDC (Mumbai) and NR-RLDC (New Delhi).
+            </p>
+</div>
+<!-- Priority 3 Card -->
+<div class="p-2.5 rounded-2xl bg-black/40 backdrop-blur-md space-y-1 border-0">
+<div class="flex items-center justify-between text-[11px] font-mono">
+<span class="font-medium text-slate-300 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> 03. ROTATE ICS MTLS TOKENS (SOUTHERN)
+              </span>
+<span class="text-slate-400 font-mono text-[10px]">T-45m</span>
+</div>
+<p class="text-xs text-slate-400 leading-snug">
+              Proactive zero-trust credential invalidation across 1,840 substations.
+            </p>
+</div>
+</div>
+</div>
+<!-- Simulator Status -->
+<div class="pointer-events-auto bg-black/40 backdrop-blur-md p-3 rounded-2xl text-left mt-3">
+<div class="flex items-center justify-between text-[10px] font-mono text-slate-400">
+<span>DIGITAL TWIN ENGINE: <strong class="text-emerald-400">SYNCED (0.18ms)</strong></span>
+<span>ENTROPY: 0.014</span>
+</div>
+</div>
+</aside>
+</div>
+<!-- FLOATING GEO PINPOINTS PINNED OVER TERRAIN -->
+<div class="absolute inset-0 pointer-events-none z-30" data-purpose="geographic-map-pinpoints">
+<!-- 1. EPICENTER: Mumbai Alpha-4 Substation (Western Grid) -->
+<div class="absolute top-[58.2%] left-[42.5%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-36 h-36 rounded-full bg-rose-600/35 animate-ping-slow"></div>
+<div class="absolute w-24 h-24 rounded-full bg-rose-500/55 animate-ping-delayed"></div>
+<div class="w-4 h-4 rounded-full bg-rose-500 ring-4 ring-rose-400/40 shadow-xl shadow-rose-600"></div>
+<!-- Floating Inspection Detail Card -->
+<div class="absolute left-8 -top-20 w-80 p-4 rounded-2xl bg-black/85 backdrop-blur-xl shadow-2xl text-left border-0 transition-transform hover:scale-105" data-purpose="breach-inspection-hud">
+<div class="flex items-center justify-between mb-1">
+<span class="text-[10px] font-mono uppercase tracking-widest text-rose-400 font-semibold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span> EPICENTER • MAHARASHTRA W-GRID
+            </span>
+<span class="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-1.5 py-0.5 rounded">T-14m TO TRIP</span>
+</div>
+<h3 class="text-sm font-bold text-white font-mono tracking-tight leading-snug">
+            RTU CVE-2024-38812 RCE BREACH
+          </h3>
+<p class="text-xs text-slate-300 mt-1 leading-relaxed">
+            MahaTransco 400kV Kalwa-Trombay loop. Rogue memory inject altering busbar trip threshold. Cascade risk to 4 states.
+          </p>
+<div class="mt-3 pt-2 flex items-center justify-between text-[11px] font-mono">
+<span class="text-slate-400">BLAST RADIUS: <strong class="text-white">4 SECTORS</strong></span>
+<button class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg font-semibold tracking-wider transition shadow-lg shadow-rose-900/50 flex items-center gap-1.5 cursor-pointer">
+<span>ISOLATE SUBSTATION</span>
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Delhi NCR Hub -->
+<div class="absolute top-[31.8%] left-[47.2%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="group relative flex items-center justify-center">
+<div class="w-3.5 h-3.5 rounded-full bg-amber-400 ring-4 ring-amber-400/30 animate-pulse"></div>
+<div class="absolute left-4 top-[-6px] whitespace-nowrap text-left bg-black/70 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="text-[11px] font-mono font-bold text-amber-300 tracking-wider drop-shadow-md">DELHI NCR</span>
+<span class="block text-[9px] font-mono text-slate-400">Freq Drop: -0.04 Hz (Inflow Strain)</span>
+</div>
+</div>
+</div>
+<!-- 3. Bengaluru Tech Corridor -->
+<div class="absolute top-[77.2%] left-[48.6%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="group relative flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/30"></div>
+<div class="absolute left-4 top-[-6px] whitespace-nowrap text-left bg-black/70 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="text-[11px] font-mono font-bold text-cyan-300 tracking-wider drop-shadow-md">BENGALURU</span>
+<span class="block text-[9px] font-mono text-emerald-400">Trauma ICU Feeder // Defended</span>
+</div>
+</div>
+</div>
+<!-- 4. Hyderabad Hub -->
+<div class="absolute top-[63.8%] left-[52.4%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="group relative flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-amber-400/90 ring-4 ring-amber-400/20"></div>
+<div class="absolute left-4 top-[-6px] whitespace-nowrap text-left bg-black/70 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="text-[11px] font-mono font-bold text-amber-300 tracking-wider drop-shadow-md">HYDERABAD</span>
+<span class="block text-[9px] font-mono text-slate-400">5G Backhaul Rerouted</span>
+</div>
+</div>
+</div>
+<!-- 5. Kolkata Eastern Grid -->
+<div class="absolute top-[49.5%] left-[65.5%] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+<div class="group relative flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-cyan-400 ring-4 ring-cyan-400/30"></div>
+<div class="absolute left-4 top-[-6px] whitespace-nowrap text-left bg-black/70 backdrop-blur-md px-2 py-0.5 rounded">
+<span class="text-[11px] font-mono font-bold text-cyan-300 tracking-wider drop-shadow-md">KOLKATA ERLDC</span>
+<span class="block text-[9px] font-mono text-cyan-400/80">Synchronous Island Ready</span>
+</div>
+</div>
+</div>
+</div>
+<!-- BOTTOM STATUS DOCK (Frameless Glass Ribbon Over Full Bleed Terrain) -->
+<footer class="w-full flex flex-col md:flex-row items-center justify-between gap-4 pointer-events-auto py-1" data-purpose="bottom-status-strip">
+<!-- Left Metric Cluster -->
+<div class="flex flex-wrap items-center gap-7 text-xs font-mono bg-black/50 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
+<!-- Protected Assets -->
+<div class="flex items-center space-x-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400"></div>
+<div>
+<span class="text-slate-400 text-[10px] uppercase tracking-wider block">PROTECTED ASSETS</span>
+<span class="text-sm font-bold text-white font-mono">882,410</span>
+<span class="text-[10px] text-slate-400 ml-1">/ 992k</span>
+</div>
+</div>
+<!-- Critical Danger -->
+<div class="flex items-center space-x-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500 animate-ping"></div>
+<div>
+<span class="text-rose-400 text-[10px] uppercase tracking-wider block font-semibold">CRITICAL DANGER</span>
+<span class="text-sm font-bold text-rose-400 font-mono">1,248</span>
+<span class="text-[10px] text-slate-400 ml-1">nodes</span>
+</div>
+</div>
+<!-- Active Alerts -->
+<div class="flex items-center space-x-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400"></div>
+<div>
+<span class="text-slate-400 text-[10px] uppercase tracking-wider block">ACTIVE PROBES</span>
+<span class="text-sm font-bold text-amber-300 font-mono">7,419</span>
+<span class="text-[10px] text-slate-400 ml-1">events/s</span>
+</div>
+</div>
+<!-- Unknown / Quarantined -->
+<div class="flex items-center space-x-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-500"></div>
+<div>
+<span class="text-slate-400 text-[10px] uppercase tracking-wider block">UNCLASSIFIED OT</span>
+<span class="text-sm font-bold text-slate-300 font-mono">1,120</span>
+<span class="text-[10px] text-slate-400 ml-1">quarantined</span>
+</div>
+</div>
+</div>
+<!-- Center/Right Playback & CERT-In Watermark -->
+<div class="flex items-center space-x-5 text-xs font-mono bg-black/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg">
+<div class="flex items-center space-x-2 text-slate-400">
+<span>PLAYBACK:</span>
+<button class="px-2.5 py-0.5 rounded-lg bg-cyan-950/60 text-cyan-300 font-semibold hover:text-white transition">LIVE REALTIME</button>
+<button class="px-2 py-0.5 rounded hover:bg-slate-900 transition text-slate-400">T-15m REPLAY</button>
+</div>
+<div class="h-4 w-px bg-slate-800 hidden md:block"></div>
+<div class="text-[11px] text-slate-400 font-mono tracking-wider flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        MINISTRY OF POWER • CERT-In DEFENSE SENTINEL
+      </div>
+</div>
+</footer>
+</div>
+<!-- 3. REALISTIC 3D PHYSICAL TOPOGRAPHIC RELIEF TERRAIN ENGINE (HIGH RESOLUTION DEM) -->
+<script data-purpose="fullbleed-india-topography-engine">
+(function () {
+  const canvas = document.getElementById('india-fullbleed-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let animationFrameId;
+
+  // Normalized polygon boundary for India covering expansive viewport space
+  const indiaPolygon = [
+    // Northern Apex: Jammu, Kashmir & Ladakh
+    [0.440, 0.050], [0.470, 0.058], [0.495, 0.080], [0.520, 0.110], [0.540, 0.150],
+    // Karakoram to Himachal & Uttarakhand
+    [0.535, 0.180], [0.550, 0.210], [0.580, 0.235], [0.610, 0.255],
+    // Nepal border indentation to Sikkim
+    [0.640, 0.270], [0.670, 0.265], [0.685, 0.250],
+    // Bhutan border to Arunachal Pradesh
+    [0.710, 0.250], [0.745, 0.230], [0.795, 0.220], [0.840, 0.240], [0.865, 0.265],
+    // Nagaland, Manipur, Mizoram eastern fringe
+    [0.845, 0.300], [0.810, 0.345], [0.795, 0.395], [0.780, 0.445], [0.750, 0.460],
+    // Bangladesh indentation & Sundarbans Bengal Delta
+    [0.715, 0.445], [0.690, 0.465], [0.680, 0.500], [0.650, 0.535],
+    // Bay of Bengal Coastline: Odisha & Andhra Pradesh
+    [0.620, 0.580], [0.585, 0.640], [0.555, 0.700], [0.530, 0.760],
+    // Tamil Nadu Coromandel coast to Kanyakumari southern apex
+    [0.508, 0.820], [0.490, 0.875], [0.482, 0.925], [0.468, 0.935], [0.456, 0.895],
+    // Kerala Malabar Coast
+    [0.440, 0.840], [0.430, 0.770],
+    // Goa & Konkan Coast (Maharashtra)
+    [0.412, 0.690], [0.402, 0.620], [0.398, 0.555],
+    // Gulf of Khambhat & Kathiawar Saurashtra (Gujarat)
+    [0.375, 0.530], [0.335, 0.535], [0.305, 0.515], [0.288, 0.480], [0.305, 0.445],
+    // Rann of Kutch & Rajasthan Thar Desert Western border
+    [0.342, 0.430], [0.358, 0.380], [0.370, 0.335], [0.390, 0.280],
+    // Punjab border to Jammu
+    [0.412, 0.220], [0.428, 0.160], [0.434, 0.095]
+  ];
+
+  function isInsideIndia(x, y) {
+    let inside = false;
+    for (let i = 0, j = indiaPolygon.length - 1; i < indiaPolygon.length; j = i++) {
+      const xi = indiaPolygon[i][0], yi = indiaPolygon[i][1];
+      const xj = indiaPolygon[j][0], yj = indiaPolygon[j][1];
+      const intersect = ((yi > y) !== (yj > y)) &&
+        (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+    }
+    return inside;
+  }
+
+  // Realistic Geographic Elevation Model of India (High-fidelity DEM)
+  function getElevation(nx, ny) {
+    if (!isInsideIndia(nx, ny)) return 0;
+    let elev = 0.08;
+
+    // 1. Great Himalayan & Karakoram Mountain Chain (High snow peaks, jagged relief)
+    if (ny < 0.28) {
+      const hRatio = Math.max(0, (0.28 - ny) / 0.23);
+      const jagged = Math.sin(nx * 58) * 0.18 + Math.cos(ny * 62) * 0.14 + Math.sin((nx + ny) * 85) * 0.12;
+      elev = Math.max(elev, 0.46 + hRatio * 0.60 + jagged);
+    }
+
+    // 2. Western Ghats (Sahyadri Range along Western Coast from Gujarat to Kerala)
+    const wgCurve = 0.395 + (ny - 0.50) * 0.13;
+    const wgDist = Math.abs(nx - wgCurve);
+    if (wgDist < 0.048 && ny > 0.52 && ny < 0.88) {
+      const wgPeak = Math.max(0, 1 - (wgDist / 0.048)) * 0.68;
+      const ridgeNoise = Math.sin(ny * 64) * 0.12 + Math.cos(nx * 70) * 0.08;
+      elev = Math.max(elev, wgPeak + ridgeNoise + 0.15);
+    }
+
+    // 3. Eastern Ghats (Discontinuous range along Eastern coast)
+    const egCurve = 0.63 - (ny - 0.55) * 0.25;
+    const egDist = Math.abs(nx - egCurve);
+    if (egDist < 0.042 && ny > 0.56 && ny < 0.76) {
+      const egPeak = Math.max(0, 1 - (egDist / 0.042)) * 0.42;
+      elev = Math.max(elev, egPeak + Math.sin(ny * 50) * 0.08);
+    }
+
+    // 4. Vindhya and Satpura Mountain Ranges (Central India east-west barrier)
+    const vindhyaDist = Math.abs((ny - 0.47) + (nx - 0.50) * 0.06);
+    if (vindhyaDist < 0.038 && nx > 0.40 && nx < 0.62) {
+      const vPeak = Math.max(0, 1 - (vindhyaDist / 0.038)) * 0.48;
+      elev = Math.max(elev, vPeak + Math.sin(nx * 44) * 0.08);
+    }
+
+    // 5. Deccan Plateau & Central Uplands Tableland (600-900m plateau)
+    if (nx > 0.41 && nx < 0.59 && ny > 0.44 && ny < 0.77) {
+      const dCenter = 1 - (Math.hypot(nx - 0.49, ny - 0.61) / 0.24);
+      if (dCenter > 0) {
+        const deccanWave = Math.sin(nx * 32) * 0.07 + Math.cos(ny * 28) * 0.06;
+        elev = Math.max(elev, 0.32 + dCenter * 0.26 + deccanWave);
+      }
+    }
+
+    // 6. Aravalli Range (Rajasthan craggy ridge northeast to southwest)
+    const aravalliDist = Math.abs((nx - 0.40) - (0.34 - ny) * 0.78);
+    if (aravalliDist < 0.032 && ny > 0.27 && ny < 0.43) {
+      const arPeak = Math.max(0, 1 - (aravalliDist / 0.032)) * 0.42;
+      elev = Math.max(elev, arPeak + Math.sin(ny * 52) * 0.08);
+    }
+
+    // 7. Indo-Gangetic Plains Basin & Brahmaputra (Carved low elevation plains)
+    if (ny >= 0.27 && ny <= 0.41 && nx >= 0.44 && nx <= 0.69) {
+      elev = Math.min(elev, 0.18 + Math.sin(nx * 20) * 0.04);
+    }
+
+    return Math.max(0.06, Math.min(1.0, elev));
+  }
+
+  // Realistic Digital Elevation Model (DEM) Hypsometric Color Ramp
+  // Deep oceanic teal -> emerald lowlands -> golden amber midlands -> warm bronze ridges -> crisp ice-white peaks
+  function getHypsometricTint(elev, shade = 0.5, alpha = 1) {
+    let r, g, b;
+
+    if (elev > 0.82) {
+      // Glacial Snow & High Himalaya Crags (>7,000m)
+      r = 238; g = 245; b = 255;
+    } else if (elev > 0.66) {
+      // High Alpine Mountain Ridges (>3,500m)
+      r = 224; g = 168; b = 88;
+    } else if (elev > 0.50) {
+      // Upper Plateau & Ghat Summits (>1,500m)
+      r = 196; g = 132; b = 38;
+    } else if (elev > 0.34) {
+      // Deccan Tableland / Central Uplands (600-1,200m)
+      r = 138; g = 152; b = 42;
+    } else if (elev > 0.20) {
+      // River Plains & Lowlands (200-500m)
+      r = 16; g = 165; b = 120;
+    } else {
+      // Coastal Belts & Estuaries (0-150m)
+      r = 4; g = 140; b = 180;
+    }
+
+    // Apply hillshading illumination
+    r = Math.min(255, Math.floor(r * (shade * 1.35 + 0.35)));
+    g = Math.min(255, Math.floor(g * (shade * 1.35 + 0.35)));
+    b = Math.min(255, Math.floor(b * (shade * 1.35 + 0.35)));
+
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  let terrainGrid = [];
+  let contourPaths = [];
+  let pointCloud = [];
+
+  const GRID_COLS = 135;
+  const GRID_ROWS = 140;
+  const EPICENTER_X = 0.425;
+  const EPICENTER_Y = 0.582;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    buildFullBleedMap();
+  }
+
+  function buildFullBleedMap() {
+    terrainGrid = [];
+    contourPaths = [];
+    pointCloud = [];
+
+    // Expansive sizing covering the entire screen
+    const mapScale = Math.max(width * 0.94, height * 1.18);
+    const offsetX = (width - mapScale) * 0.50;
+    const offsetY = (height - mapScale) * 0.47;
+
+    for (let r = 0; r < GRID_ROWS; r++) {
+      const row = [];
+      for (let c = 0; c < GRID_COLS; c++) {
+        const nx = c / (GRID_COLS - 1);
+        const ny = r / (GRID_ROWS - 1);
+        const inside = isInsideIndia(nx, ny);
+        const elev = inside ? getElevation(nx, ny) : 0;
+
+        // 3D Isometric extrusion relief calculation
+        const extrudeZ = elev * 54;
+        const px = offsetX + nx * mapScale;
+        const py = offsetY + ny * mapScale - extrudeZ;
+        const basePx = offsetX + nx * mapScale;
+        const basePy = offsetY + ny * mapScale;
+        const distToBreach = Math.hypot(nx - EPICENTER_X, (ny - EPICENTER_Y) * 1.15);
+
+        const node = { nx, ny, inside, elev, extrudeZ, px, py, basePx, basePy, distToBreach };
+        row.push(node);
+
+        if (inside) {
+          pointCloud.push({
+            ...node,
+            phase: Math.random() * Math.PI * 2,
+            twinkleSpeed: 0.8 + Math.random() * 0.8
+          });
+        }
+      }
+      terrainGrid.push(row);
+    }
+
+    // Topographic isolines (8 distinct altitude elevation tiers)
+    const isoLevels = [0.14, 0.24, 0.36, 0.48, 0.60, 0.72, 0.84, 0.94];
+    isoLevels.forEach(iso => {
+      for (let r = 0; r < GRID_ROWS - 1; r += 2) {
+        let activeSegment = [];
+        for (let c = 0; c < GRID_COLS - 1; c += 2) {
+          const p0 = terrainGrid[r][c];
+          const p1 = terrainGrid[r][c + 1];
+          if (p0.inside && p1.inside) {
+            if ((p0.elev >= iso && p1.elev < iso) || (p0.elev < iso && p1.elev >= iso)) {
+              activeSegment.push({ x: (p0.px + p1.px) / 2, y: (p0.py + p1.py) / 2 });
+            }
+          }
+        }
+        if (activeSegment.length > 3) {
+          contourPaths.push({ level: iso, pts: activeSegment });
+        }
+      }
+    });
+  }
+
+  let tick = 0;
+
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+    tick += 0.035;
+
+    const mapScale = Math.max(width * 0.94, height * 1.18);
+    const offsetX = (width - mapScale) * 0.50;
+    const offsetY = (height - mapScale) * 0.47;
+
+    // 1. SOLID DEEP RELIEF BASE MESH & SHADED ILLUMINATION
+    // Light source from Northwest (315 deg azimuth, 45 deg zenith)
+    const lx = -0.707, ly = -0.707;
+
+    for (let r = 0; r < GRID_ROWS - 2; r += 2) {
+      for (let c = 0; c < GRID_COLS - 2; c += 2) {
+        const p0 = terrainGrid[r][c];
+        const p1 = terrainGrid[r][c + 2];
+        const p2 = terrainGrid[r + 2][c + 2];
+        const p3 = terrainGrid[r + 2][c];
+
+        if (p0.inside && p1.inside && p2.inside && p3.inside) {
+          const avgElev = (p0.elev + p1.elev + p2.elev + p3.elev) / 4;
+          
+          // Hillshade normal approximation
+          const dzdx = (p1.elev - p0.elev + p2.elev - p3.elev) * 2.2;
+          const dzdy = (p3.elev - p0.elev + p2.elev - p1.elev) * 2.2;
+          const shade = Math.min(1.0, Math.max(0.20, 0.48 - (dzdx * lx + dzdy * ly)));
+
+          ctx.beginPath();
+          ctx.moveTo(p0.px, p0.py);
+          ctx.lineTo(p1.px, p1.py);
+          ctx.lineTo(p2.px, p2.py);
+          ctx.lineTo(p3.px, p3.py);
+          ctx.closePath();
+
+          // Render physical relief hypsometric shading
+          ctx.fillStyle = getHypsometricTint(avgElev, shade, 0.65);
+          ctx.fill();
+
+          // Cast relief ridge shadows for prominent mountain chains
+          if (avgElev > 0.42 && shade < 0.42) {
+            ctx.fillStyle = 'rgba(1, 4, 12, 0.42)';
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    // 2. FINE-GRAINED 3D TOPOGRAPHIC CONTOUR ISOLINES
+    ctx.lineWidth = 1.0;
+    contourPaths.forEach(line => {
+      if (line.pts.length < 2) return;
+      ctx.beginPath();
+      ctx.moveTo(line.pts[0].x, line.pts[0].y);
+      for (let i = 1; i < line.pts.length; i++) {
+        ctx.lineTo(line.pts[i].x, line.pts[i].y);
+      }
+      
+      // Index contours glow brighter
+      const isIndexContour = Math.abs(line.level - 0.48) < 0.02 || Math.abs(line.level - 0.72) < 0.02;
+      ctx.strokeStyle = isIndexContour ? 'rgba(0, 242, 254, 0.45)' : getHypsometricTint(line.level, 0.8, 0.32);
+      ctx.lineWidth = isIndexContour ? 1.4 : 0.85;
+      ctx.stroke();
+    });
+
+    // 3. SHORELINE & TERRITORIAL BOUNDARY (GLOWING BLUE GIS CONTOUR)
+    ctx.beginPath();
+    for (let i = 0; i < indiaPolygon.length; i++) {
+      const pt = indiaPolygon[i];
+      const px = offsetX + pt[0] * mapScale;
+      const py = offsetY + pt[1] * mapScale;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.lineWidth = 2.0;
+    ctx.strokeStyle = 'rgba(0, 242, 254, 0.65)';
+    ctx.shadowColor = 'rgba(0, 242, 254, 0.6)';
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // 4. POINT CLOUD & THERMAL DISPERSION MATRIX OVER TERRAIN
+    for (let i = 0; i < pointCloud.length; i++) {
+      const p = pointCloud[i];
+      const isNearBreach = p.distToBreach < 0.28;
+      const heatFactor = Math.max(0, 1 - (p.distToBreach / 0.28));
+      const shockwave = Math.sin(tick * 3.8 - p.distToBreach * 26);
+      const activeShock = isNearBreach ? Math.max(0, shockwave) * heatFactor : 0;
+
+      let radius = 1.3 + (p.elev * 1.2);
+      let dotColor = '';
+
+      if (isNearBreach) {
+        if (heatFactor > 0.6) {
+          const alpha = 0.90 + Math.sin(tick * 5 + p.phase) * 0.10;
+          dotColor = `rgba(239, 68, 68, ${alpha})`;
+          radius = 2.8 + activeShock * 1.8;
+        } else if (heatFactor > 0.3) {
+          const alpha = 0.78 + activeShock * 0.22;
+          dotColor = `rgba(245, 158, 11, ${alpha})`;
+          radius = 2.0 + activeShock * 1.2;
+        } else {
+          dotColor = `rgba(251, 191, 36, 0.70)`;
+          radius = 1.6;
+        }
+      } else {
+        const twinkle = Math.sin(tick * p.twinkleSpeed + p.phase) * 0.25;
+        const alpha = Math.min(0.95, Math.max(0.3, 0.52 + twinkle));
+
+        if (p.elev > 0.78) {
+          // High snow summits
+          dotColor = `rgba(255, 255, 255, ${alpha * 1.2})`;
+          radius = 2.0;
+        } else if (p.elev > 0.48) {
+          // Golden ridges & Western Ghats crests
+          dotColor = `rgba(245, 158, 11, ${alpha * 1.0})`;
+          radius = 1.6;
+        } else if ((i % 12) === 0) {
+          // Smart transmission node
+          dotColor = `rgba(0, 242, 254, ${alpha * 1.25})`;
+          radius = 2.1;
+        } else {
+          // Lowland plains & coastline
+          dotColor = `rgba(16, 185, 129, ${alpha * 0.9})`;
+          radius = 1.3;
+        }
+      }
+
+      ctx.beginPath();
+      ctx.arc(p.px, p.py, radius, 0, Math.PI * 2);
+      ctx.fillStyle = dotColor;
+      ctx.fill();
+    }
+
+    animationFrameId = requestAnimationFrame(render);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  render();
+})();
+</script>
+<!-- Live Military IST Clock -->
+<script data-purpose="hud-clock-telemetry">
+  function updateClock() {
+    const now = new Date();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const istTime = new Date(utc + (3600000 * 5.5));
+    const hours = String(istTime.getHours()).padStart(2, '0');
+    const minutes = String(istTime.getMinutes()).padStart(2, '0');
+    const seconds = String(istTime.getSeconds()).padStart(2, '0');
+    const el = document.getElementById('ist-clock');
+    if (el) el.textContent = `${hours}:${minutes}:${seconds} IST`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+</body></html>
