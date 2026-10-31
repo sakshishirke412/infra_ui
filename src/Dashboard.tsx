@@ -356,18 +356,18 @@ const StatusBadge = ({ status }: { status: "healthy" | "warning" | "critical" })
 // ============================================
 // CHART COMPONENTS
 // ============================================
-const HistogramChart = ({ data, maxValue = 600 }: { data: number[]; maxValue?: number }) => (
-  <div className="h-40 flex items-end justify-around gap-1 px-2">
+const HistogramChart = ({ data, maxValue = 600, className = "" }: { data: number[]; maxValue?: number; className?: string }) => (
+  <div className={`h-40 flex items-end justify-around gap-1 px-2 ${className}`}>
     {data.map((val, i) => (
       <div key={i} className="flex-1 max-w-6" style={{ height: `${Math.max((val / maxValue) * 100, 4)}%` }}>
-        <div className="w-full rounded-t transition-all duration-300 hover:opacity-80"
+        <div className="w-full h-full rounded-t transition-all duration-300 hover:opacity-80"
           style={{ background: `linear-gradient(180deg, #06b6d4 0%, #0891b2 100%)` }} />
       </div>
     ))}
   </div>
 );
 
-const SpikeChart = ({ data, maxValue = 100 }: { data: number[]; maxValue?: number }) => {
+const SpikeChart = ({ data, maxValue = 100, className = "" }: { data: number[]; maxValue?: number; className?: string }) => {
   const pathData = data.map((val, i) => {
     const x = (i / (data.length - 1)) * 400;
     const y = 128 - (val / maxValue) * 110;
@@ -381,7 +381,7 @@ const SpikeChart = ({ data, maxValue = 100 }: { data: number[]; maxValue?: numbe
   }).join(" ");
 
   return (
-    <svg className="w-full h-32" viewBox="0 0 400 128" preserveAspectRatio="none">
+    <svg className={`w-full h-32 ${className}`} viewBox="0 0 400 128" preserveAspectRatio="none">
       <defs>
         <linearGradient id="spikeGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.8" />
@@ -748,7 +748,7 @@ const MatrixPanel = ({ data }: { data: MatrixRow[] }) => (
     
     <div className="flex-1 overflow-hidden relative">
       <div className="absolute left-0 top-0 bottom-0 w-24 flex flex-col justify-around px-2 text-right pr-3">
-        {data.map((row, i) => (
+        {data.map((row) => (
           <div key={row.action} className="flex items-center h-1/4">
             <span className="text-[11px] text-slate-400 whitespace-nowrap">{row.action}</span>
           </div>
@@ -811,7 +811,7 @@ const TopBar = () => (
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 rounded bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
-          <span className="text-white font-bold text-xs">></span>
+          <span className="text-white font-bold text-xs">{">"}</span>
         </div>
         <span className="font-mono text-white font-medium">splunk</span>
       </div>
@@ -947,7 +947,7 @@ export default function PerformanceDashboard() {
 
   const { data: alertsHist, loading: histLoading } = useAlertsHistogram(24);
   const { data: spikes, loading: spikesLoading } = useSpikeChart(6);
-  const { data: assets, loading: assetsLoading, refetch: refetchAssets } = useAssets();
+  const { data: assets, loading: assetsLoading } = useAssets();
   const { data: riskIndices, loading: riskLoading } = useRiskIndices();
   const { data: severityCards, loading: severityLoading } = useSeverityCards();
   const { data: matrixData, loading: matrixLoading } = useMatrixData();
@@ -965,7 +965,7 @@ export default function PerformanceDashboard() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white font-sans antialiased">
-      <style jsx global>{`
+      <style>{`
         @keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fade-in 0.2s ease-out; }
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
@@ -979,7 +979,7 @@ export default function PerformanceDashboard() {
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
           </div>
-          <span className="text-[11px] text-slate-500 font-mono ml-2">splunk></span>
+          <span className="text-[11px] text-slate-500 font-mono ml-2">splunk{">"}</span>
           <span className="text-[10px] text-slate-600 ml-auto">
             {loading ? "Loading..." : "System Performance Software"}
           </span>

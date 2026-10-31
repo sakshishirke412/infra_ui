@@ -17,7 +17,6 @@ export default defineConfig({
         '**/NTUSER.DAT*',
         '**/ntuser.*',
         '**/Desktop.ini',
-        '**/OneDrive/**',
         '**/.849C9593-*',
       ],
     },
