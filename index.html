@@ -1,21 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>System Performance Dashboard</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body, #root { height: 100%; width: 100%; }
-      body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AEGIS-IND // Sovereign Cyber-Risk &amp; Critical Infrastructure Defense Console</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Orbitron for tactical display, Plus Jakarta Sans & JetBrains Mono for telemetry -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,800;1,400&amp;family=Orbitron:wght@500;700;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#02050b',
+            void: '#010307',
+            aegisCyan: '#00f2fe',
+            aegisEmerald: '#10b981',
+            aegisAmber: '#f59e0b',
+            aegisCrimson: '#ef4444',
+            aegisRuby: '#dc2626',
+            aegisPurple: '#8b5cf6',
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            tactical: ['"Orbitron"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'radial-ripple': 'ripple 3s ease-out infinite',
+            'scanline': 'scanline 8s linear infinite',
+            'dash-travel': 'dash 20s linear infinite',
+          },
+          keyframes: {
+            ripple: {
+              '0%': { transform: 'scale(0.8)', opacity: '0.9' },
+              '100%': { transform: 'scale(3.2)', opacity: '0' },
+            },
+            dash: {
+              'to': { strokeDashoffset: '-1000' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Global & Seamless Vignette Layout Styles -->
+<style data-purpose="seamless-theme">
+    html, body {
+      background-color: #02050b;
+      color: #94a3b8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      user-select: none;
+    }
+    
+    * {
+      box-sizing: border-box;
+      border-color: transparent !important;
+      outline: none;
+    }
+
+    .bg-space-atmosphere {
+      background: radial-gradient(circle at 50% 45%, #050d1a 0%, #020610 50%, #010307 100%);
+    }
+
+    .bloom-crimson {
+      filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.75)) drop-shadow(0 0 60px rgba(239, 68, 68, 0.45));
+    }
+    .bloom-cyan {
+      filter: drop-shadow(0 0 16px rgba(0, 242, 254, 0.5));
+    }
+    .bloom-emerald {
+      filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.5));
+    }
+
+    /* Cinematic Vignette lens overlay */
+    .viewport-vignette {
+      background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(1, 3, 7, 0.55) 75%, rgba(1, 3, 7, 0.92) 100%);
+      pointer-events: none;
+    }
+
+    /* Tactical latitude/longitude graticule marks */
+    .graticule-grid {
+      background-size: 100px 100px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 242, 254, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 242, 254, 0.025) 1px, transparent 1px);
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+    }
+  </style>
+<!-- Canvas & Animation Styling -->
+<style data-purpose="canvas-and-hud">
+    #india-fullbleed-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes ping-slow {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(2.6); opacity: 0.25; }
+      100% { transform: scale(3.6); opacity: 0; }
+    }
+    .animate-ping-slow {
+      animation: ping-slow 2.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    @keyframes ping-delayed {
+      0% { transform: scale(0.8); opacity: 0; }
+      30% { transform: scale(1.6); opacity: 0.75; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .animate-ping-delayed {
+      animation: ping-delayed 2.6s cubic-bezier(0, 0.2, 0.8, 1) 0.8s infinite;
+    }
+    .conduit-flow {
+      stroke-dasharray: 6 6;
+      animation: conduit-dash 2s linear infinite;
+    }
+    @keyframes conduit-dash {
+      from { stroke-dashoffset: 24; }
+      to { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body class="bg-space-atmosphere w-screen h-screen relative select-none overflow-hidden text-slate-300">
+<!-- 1. FULL-BLEED 100VW x 100VH 3D TOPOGRAPHIC PHYSICAL RELIEF CANVAS -->
+<canvas id="india-fullbleed-canvas"></canvas>
+<!-- Subtle Graticule Grid & Vignette Backdrop Layers -->
+<div class="absolute inset-0 z-[2] graticule-grid pointer-events-none opacity-50"></div>
+<div class="absolute inset-0 z-[3] viewport-vignette"></div>
+<!-- Topographic & Cyber Conduit SVG Overlay Layer (Anchored to terrain coordinates) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-[4]" id="terrain-conduits-svg">
+<defs>
+<!-- Mumbai Western Grid Major Breach Glow -->
+<radialgradient cx="42.5%" cy="58%" id="epicenterThermalGlow" r="22%">
+<stop offset="0%" stop-color="#ef4444" stop-opacity="0.95"></stop>
+<stop offset="25%" stop-color="#f97316" stop-opacity="0.75"></stop>
+<stop offset="55%" stop-color="#eab308" stop-opacity="0.25"></stop>
+<stop offset="85%" stop-color="#00f2fe" stop-opacity="0.04"></stop>
+<stop offset="100%" stop-color="#010307" stop-opacity="0"></stop>
+</radialgradient>
+<!-- Secondary Cascade Heat Ring (Delhi NCR) -->
+<radialgradient cx="47.2%" cy="31.8%" id="delhiThermalGlow" r="14%">
+<stop offset="0%" stop-color="#f59e0b" stop-opacity="0.65"></stop>
+<stop offset="45%" stop-color="#f59e0b" stop-opacity="0.18"></stop>
+<stop offset="100%" stop-color="#010307" stop-opacity="0"></stop>
+</radialgradient>
+<!-- Secondary Cascade Heat Ring (Bengaluru / Hyderabad) -->
+<radialgradient cx="50.2%" cy="75.5%" id="southThermalGlow" r="16%">
+<stop offset="0%" stop-color="#00f2fe" stop-opacity="0.5"></stop>
+<stop offset="50%" stop-color="#10b981" stop-opacity="0.12"></stop>
+<stop offset="100%" stop-color="#010307" stop-opacity="0"></stop>
+</radialgradient>
+<filter height="160%" id="neonBlur" width="160%" x="-30%" y="-30%">
+<fegaussianblur result="blur" stddeviation="3.5"></fegaussianblur>
+<femerge>
+<femergenode in="blur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Thermal Heatmap Radiations over Topography -->
+<circle class="animate-pulse" cx="42.5%" cy="58.2%" fill="url(#epicenterThermalGlow)" r="250" style="animation-duration: 3.2s;"></circle>
+<circle cx="47.2%" cy="31.8%" fill="url(#delhiThermalGlow)" opacity="0.75" r="125"></circle>
+<circle cx="50.2%" cy="75.5%" fill="url(#southThermalGlow)" opacity="0.55" r="135"></circle>
+<!-- Major Topographic River Systems (Cyber GIS Carved Hydrography) -->
+<g fill="none" opacity="0.45" stroke="#00f2fe" stroke-linecap="round">
+<!-- Indus River Upper Tributaries -->
+<path d="M 44.8% 13.5% Q 43% 18% 41.5% 23% T 40% 28%" stroke-dasharray="2 3" stroke-width="1.2"></path>
+<!-- Ganges (Ganga) River Basin -->
+<path d="M 49.5% 24.5% Q 54% 28.5% 58.5% 33% T 64% 39% T 68.5% 45.5%" stroke-width="1.6"></path>
+<!-- Yamuna River -->
+<path d="M 47.8% 25.5% Q 49.5% 31% 54.5% 33.5% T 61% 35.8%" stroke-width="1.1"></path>
+<!-- Brahmaputra River Basin Loop -->
+<path d="M 68% 21% Q 78% 20.5% 83% 24% T 79% 29% T 71% 39% T 69.5% 46%" stroke-width="1.5"></path>
+<!-- Narmada River (between Vindhya & Satpura) -->
+<path d="M 55.5% 50.2% Q 48% 50.8% 39.5% 51.5%" stroke-width="1.4"></path>
+<!-- Godavari River -->
+<path d="M 42% 57% Q 50% 59% 58% 62.5% T 61.5% 65.5%" stroke-width="1.3"></path>
+<!-- Krishna River -->
+<path d="M 43% 66% Q 49% 68% 55% 70% T 58.5% 72.5%" stroke-width="1.2"></path>
+</g>
+<!-- Pulsating Transmission Cyber Conduits Interconnecting Nodes -->
+<g fill="none" filter="url(#neonBlur)">
+<!-- Mumbai -> Delhi NCR (Critical Strain Path) -->
+<path class="conduit-flow" d="M 42.5% 58.2% Q 44.5% 44% 47.2% 31.8%" stroke="#ef4444" stroke-width="2.4"></path>
+<!-- Mumbai -> Bengaluru -->
+<path class="conduit-flow" d="M 42.5% 58.2% Q 45.8% 68% 48.6% 77.2%" stroke="#f59e0b" stroke-width="2.2"></path>
+<!-- Mumbai -> Hyderabad -->
+<path class="conduit-flow" d="M 42.5% 58.2% Q 47.5% 61.5% 52.4% 63.8%" stroke="#f59e0b" stroke-width="1.8"></path>
+<!-- Hyderabad -> Kolkata Load Despatch Centre -->
+<path class="conduit-flow" d="M 52.4% 63.8% Q 59.5% 56.5% 65.5% 49.5%" stroke="#00f2fe" stroke-width="1.8"></path>
+<!-- Delhi NCR -> Kolkata Northern Transmit -->
+<path d="M 47.2% 31.8% Q 56% 39% 65.5% 49.5%" opacity="0.65" stroke="#00f2fe" stroke-dasharray="5 5" stroke-width="1.6"></path>
+<!-- Bengaluru -> Chennai / Southern Ring -->
+<path d="M 48.6% 77.2% Q 52% 76% 54.8% 74.8%" opacity="0.7" stroke="#10b981" stroke-width="1.4"></path>
+</g>
+<!-- Key Topographic Elevation Labels & Spot Heights -->
+<g fill="#f59e0b" font-family="JetBrains Mono" font-size="9" opacity="0.75">
+<!-- Himalayas / K2 / Kanchenjunga / Everest ridge reference -->
+<text x="63%" y="22%">▲ MT. EVEREST +8,848m [HIMALAYAS]</text>
+<text x="49%" y="12%">▲ K2 +8,611m [KARAKORAM]</text>
+<text x="69%" y="24.5%">▲ KANCHENJUNGA +8,586m</text>
+<!-- Western Ghats peaks -->
+<text x="35.5%" y="56.5%">▲ KALSUBAI +1,646m</text>
+<text x="41.5%" y="81.5%">▲ ANAMUDI +2,695m [W-GHATS]</text>
+<!-- Central ranges -->
+<text x="46%" y="48.5%">≈ VINDHYA-SATPURA RIDGE +1,350m</text>
+<!-- Deccan tableland -->
+<text x="47%" y="65%">[DECCAN HIGH PLATEAU 600-900m]</text>
+<!-- Eastern Ghats -->
+<text x="59%" y="60%">▲ ARMA KONDA +1,680m [E-GHATS]</text>
+</g>
+<!-- Geo Graticule Ticks & Latitude Markers across full bleed terrain -->
+<g fill="#00f2fe" font-family="JetBrains Mono" font-size="9" opacity="0.4">
+<text x="2%" y="15%">34°N // IND-N</text>
+<text x="2%" y="35%">28°N // IND-NCR</text>
+<text x="2%" y="58%">19°N // IND-W</text>
+<text x="2%" y="78%">12°N // IND-S</text>
+<text x="2%" y="96%">08°N // IND-EQ</text>
+<text x="28%" y="98%">72°E</text>
+<text x="48%" y="98%">78°E</text>
+<text x="68%" y="98%">84°E</text>
+<text x="88%" y="98%">92°E</text>
+</g>
+</svg>
+<!-- 2. FULL-BLEED SEAMLESS HUD INTERFACE (Floating directly over 3D terrain) -->
+<div class="relative z-10 w-full h-full flex flex-col justify-between p-6 pointer-events-none">
+<!-- TOP HEADER HUD (Organic Frameless Floating Ribbon) -->
+<header class="w-full flex flex-col xl:flex-row items-start xl:items-center justify-between gap-4 pointer-events-auto" data-purpose="tactical-command-header">
+<!-- Brand & System Nomenclature -->
+<div class="flex items-center space-x-4">
+<!-- Tactical emblem icon -->
+<div class="relative w-11 h-11 flex items-center justify-center">
+<div class="absolute inset-0 bg-aegisCyan/25 rounded-full blur-md"></div>
+<div class="absolute inset-1 bg-gradient-to-tr from-cyan-600 via-emerald-400 to-amber-300 rounded-full opacity-80 animate-pulse-slow"></div>
+<svg class="w-6 h-6 text-black relative z-10" fill="none" stroke="currentColor" stroke-width="2.3" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<div class="flex items-center gap-3">
+<h1 class="font-tactical text-lg tracking-wider font-extrabold text-white drop-shadow-lg">
+            AEGIS-IND <span class="text-cyan-400 font-light">//</span> BHARAT CYBER DEFENSE SENTINEL
+          </h1>
+<span class="px-2.5 py-0.5 text-[10px] font-mono font-semibold rounded-full bg-rose-500/15 text-rose-400 tracking-wider animate-pulse flex items-center gap-1.5 backdrop-blur-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+            ACTIVE CASCADE BREACH
+          </span>
+</div>
+<p class="font-mono text-xs text-slate-400 mt-0.5 tracking-tight flex items-center gap-3">
+<span>CODENAME: <strong class="text-slate-200 font-medium">TRISHUL-DEFCON 2</strong></span>
+<span class="text-slate-600">|</span>
+<span>GRID SYNC: <span class="text-emerald-400 font-mono">50.024 Hz (Nominal)</span></span>
+<span class="text-slate-600">|</span>
+<span>CERT-In ADVISORY: <span class="text-amber-400 font-mono">CI-2024-9981</span></span>
+</p>
+</div>
+</div>
+<!-- Live Critical Infrastructure Sectors HUD Pills -->
+<nav class="flex flex-wrap items-center gap-2 text-xs font-mono" data-purpose="sector-filters">
+<button class="px-3.5 py-1.5 rounded-full bg-slate-900/60 hover:bg-slate-800/80 text-cyan-300 font-medium transition-all flex items-center gap-2 backdrop-blur-md cursor-pointer shadow-lg shadow-black/40">
+<span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        POWER TRANSMISSION (W-GRID)
+      </button>
+<button class="px-3.5 py-1.5 rounded-full bg-slate-950/45 hover:bg-slate-850/60 text-slate-400 hover:text-slate-200 transition-all flex items-center gap-2 backdrop-blur-md cursor-pointer">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        SCADA WATER NETWORKS
+      </button>
+<button class="px-3.5 py-1.5 rounded-full bg-slate-950/45 hover:bg-slate-850/60 text-slate-400 hover:text-slate-200 transition-all flex items-center gap-2 backdrop-blur-md cursor-pointer">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+        TELCO 5G CORE / FIBER
+      </button>
+<button class="px-3.5 py-1.5 rounded-full bg-slate-950/45 hover:bg-slate-850/60 text-slate-400 hover:text-slate-200 transition-all flex items-center gap-2 backdrop-blur-md cursor-pointer">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        AIIMS HEALTHCARE FEEDERS
+      </button>
+<div class="h-4 w-px bg-slate-800 mx-1 hidden sm:block"></div>
+<div class="text-[11px] font-mono text-slate-400 px-2.5 py-1 bg-black/60 rounded-full backdrop-blur-md">
+        IST: <span class="text-white font-semibold" id="ist-clock">17:22:58 IST</span>
+</div>
+</nav>
+</header>
+<!-- MID VIEWPORT: FLOATING LATERAL TELEMETRY (Left OT Nodes + Right Fix First Queue) -->
+<div class="w-full flex-1 flex justify-between items-center py-2 pointer-events-none relative">
+<!-- LEFT TELEMETRY COLUMN -->
+<aside class="w-80 lg:w-96 flex flex-col justify-between h-full max-h-[720px] pointer-events-none select-none z-20">
+<div class="space-y-5 pointer-events-auto bg-black/40 backdrop-blur-md p-4 rounded-3xl">
+<!-- Sovereign OT Nodes Telemetry -->
+<div class="space-y-1">
+<div class="flex items-center justify-between text-[11px] font-mono tracking-widest text-slate-400">
+<span>SOVEREIGN OT NODES MONITORED</span>
+<span class="text-cyan-400 flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span> LIVE
+            </span>
+</div>
+<div class="flex items-baseline space-x-3">
+<span class="font-mono text-4xl lg:text-5xl font-extrabold text-white tracking-tighter drop-shadow-md">882,410</span>
+<span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">
+              +1,420 PLCs online
+            </span>
+</div>
+<div class="text-[11px] text-slate-400 font-mono">
+            IEC 60870-5-104 • DNP3 Secure • Modbus TCP active subnets
+          </div>
+</div>
+<!-- Cascade Risk Index with Ambient Thermal Accent -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-slate-300 font-semibold tracking-wider">GRID CASCADE RISK INDEX</span>
+<span class="text-rose-400 font-mono font-bold text-sm tracking-wide">84.2 <span class="text-[10px] text-rose-500">/ 100 [CRITICAL]</span></span>
+</div>
+<!-- Borderless progress bar with gradient glow -->
+<div class="w-full h-2 rounded-full bg-slate-900/90 overflow-hidden relative">
+<div class="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-rose-500 rounded-full w-[84.2%] bloom-crimson"></div>
+</div>
+<div class="flex justify-between text-[10px] font-mono text-slate-400">
+<span>ISOLATION THRESHOLD: 75.0</span>
+<span class="text-rose-400 font-medium">TRIP PROBABILITY: 91.4%</span>
+</div>
+</div>
+<!-- ICS Exploit Probing Intensity Waveform Sparkline -->
+<div class="space-y-1 pt-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+<span class="tracking-wider">ANOMALOUS PROTOCOL PACKET BURST</span>
+<span class="text-amber-400 font-mono font-semibold">18.4k pkt/sec</span>
+</div>
+<div class="h-14 w-full flex items-end">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 300 70">
+<defs>
+<lineargradient id="waveGradientFull" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ef4444" stop-opacity="0.45"></stop>
+<stop offset="100%" stop-color="#ef4444" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path class="bloom-crimson" d="M 0 50 Q 25 45, 50 52 T 100 48 T 130 55 T 160 40 T 180 62 T 210 20 T 225 65 T 240 10 T 260 5 T 280 25 T 300 4" fill="none" stroke="#ef4444" stroke-width="2.4"></path>
+<path d="M 0 50 Q 25 45, 50 52 T 100 48 T 130 55 T 160 40 T 180 62 T 210 20 T 225 65 T 240 10 T 260 5 T 280 25 T 300 4 L 300 70 L 0 70 Z" fill="url(#waveGradientFull)"></path>
+</svg>
+</div>
+<div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+<span>T-60s Modbus Coils Scan</span>
+<span class="text-rose-400 font-medium">ATTACK VECTOR: ZERO-DAY EXPLOIT</span>
+</div>
+</div>
+<!-- Purdue Model Layer Distribution -->
+<div class="space-y-1.5 pt-1">
+<span class="text-[10px] font-mono tracking-widest text-slate-400">PURDUE MODEL BREACH PROPAGATION</span>
+<div class="space-y-1 text-xs font-mono">
+<div class="flex items-center justify-between py-1 px-2.5 rounded-lg bg-black/40">
+<span class="text-slate-400">L4 Enterprise Hub</span>
+<span class="text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> SECURED (ZTA)</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2.5 rounded-lg bg-black/40">
+<span class="text-slate-400">L3 Operations DMZ</span>
+<span class="text-amber-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> PROBED (FW-BYPASS)</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2.5 rounded-lg bg-rose-500/15 text-rose-300">
+<span class="font-semibold">L2 / L1 RTU &amp; Field PLCs</span>
+<span class="text-rose-400 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span> COMPROMISED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Context Directive (Bottom Left) -->
+<div class="pointer-events-auto bg-black/40 backdrop-blur-md p-3.5 rounded-2xl mt-3">
+<div class="text-[10px] font-mono text-slate-400 tracking-wider">NATIONAL CYBER RESILIENCE DIRECTIVE</div>
+<p class="text-xs text-slate-300 font-sans mt-0.5 leading-relaxed">
+          National Critical Information Infrastructure Protection Centre (NCIIPC) automated containment sync active.
+        </p>
+</div>
+</aside>
+<!-- RIGHT DISPATCH HUD COLUMN (AI Action Queue + Splunk Radial Gauges) -->
+<aside class="w-80 lg:w-96 flex flex-col justify-between h-full max-h-[720px] pointer-events-none select-none text-right z-20">
+<div class="space-y-4 pointer-events-auto bg-black/40 backdrop-blur-md p-4 rounded-3xl">
+<!-- Splunk-Inspired Circular Radial Risk Dials -->
+<div class="flex items-center justify-end gap-5" data-purpose="splunk-style-radial-meters">
+<!-- Meter 1: Exploit Risk -->
+<div class="flex flex-col items-center">
+<div class="relative w-18 h-18 flex items-center justify-center">
+<svg class="w-18 h-18 -rotate-90" viewbox="0 0 36 36">
+<path class="text-s
